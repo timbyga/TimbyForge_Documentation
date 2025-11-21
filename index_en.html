@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TIMBYD.FORGE | Professional SWF Solutions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <meta property="og:title" content="TIMBYD.FORGE | Premium SWF Subscription Plans" />
+    <meta property="og:description" content="SWF Content Subscriptions, HD Maps, and Graphic Design for RPG servers. Forge your legacy!" />
+    <meta property="og:image" content="https://www.canva.com/es_mx/logos/" />
+    <meta property="og:url" content="https://mihosting.com/ayuda/hosting/public-html/" />
+
+    <style>
+        :root {
+            --primary-bg: #1A1A1A;
+            --secondary-bg: #222;
+            --border-color: #3A3A3A;
+            --text-color: #F0F0F0;
+            --neon-color: #C0FF00; /* Verde Neón - Marca */
+            --accent-color: #FFC107; /* Amarillo - CTA / Énfasis */
+            --error-color: #E74C3C; /* Rojo - Errores */
+            --header-height: 50px;
+            --sidebar-width: 280px;
+            --navbar-bg: #111111;
+        }
+
+        /* RESET & BASE */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--primary-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+            font-size: 15px;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* --- HEADER & NAVIGATION (GRID/FLEX) --- */
+        .header {
+            height: var(--header-height);
+            background-color: var(--navbar-bg);
+            border-bottom: 3px solid var(--neon-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            font-weight: 600;
+        }
+
+        .header-left, .header-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .navbar-center {
+            display: flex;
+            gap: 5px;
+            flex-grow: 1; 
+            justify-content: center;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        /* Logo Central */
+        .navbar-logo-center {
+            margin: 0 10px;
+            transition: transform 0.3s ease, filter 0.3s ease;
+            cursor: pointer;
+        }
+        .navbar-logo-center img {
+            height: 40px; 
+            width: auto;
+            vertical-align: middle;
+            filter: drop-shadow(0 0 5px rgba(192, 255, 0, 0.4));
+        }
+
+        .navbar-logo-center:hover {
+            transform: scale(1.2);
+            filter: drop-shadow(0 0 10px var(--accent-color));
+        }
+
+        /* Separadores */
+        .navbar-text-separator {
+            font-size: 1.3em;
+            color: var(--neon-color);
+            font-weight: 700;
+            padding: 0 5px;
+            transition: transform 0.2s ease, color 0.2s;
+            cursor: default;
+        }
+        
+        .navbar-text-separator:hover {
+            transform: scale(1.1);
+            color: var(--accent-color);
+        }
+
+        /* Items de Menú */
+        .navbar-item {
+            position: relative;
+        }
+        .navbar-item > a {
+            color: var(--text-color);
+            text-decoration: none;
+            padding: 15px 15px;
+            transition: color 0.2s, background-color 0.2s, transform 0.2s ease;
+            display: block;
+        }
+        .navbar-item > a:hover {
+            color: var(--neon-color);
+            transform: translateY(-2px);
+        }
+        .navbar-item > a.active {
+            color: var(--primary-bg);
+            background-color: var(--neon-color);
+            border-bottom: 3px solid var(--neon-color);
+            height: var(--header-height);
+            display: flex;
+            align-items: center;
+            margin-bottom: -3px;
+        }
+
+        /* Dropdown Menu (General) */
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--navbar-bg);
+            border: 1px solid var(--neon-color);
+            border-top: none;
+            z-index: 10;
+            min-width: 150px;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.2s, visibility 0.2s;
+            padding: 5px 0;
+            border-radius: 0 0 5px 5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+        }
+        .navbar-item:hover .dropdown-menu {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .dropdown-menu a {
+            padding: 8px 15px;
+            color: var(--text-color);
+            text-decoration: none;
+            display: block;
+            white-space: nowrap;
+        }
+        .dropdown-menu a:hover {
+            background-color: #3A3A3A;
+            color: var(--neon-color);
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        /* Contenedor de Idioma */
+        .language-dropdown-container {
+            position: relative;
+            cursor: pointer;
+            padding: 15px 15px;
+            transition: background-color 0.2s;
+        }
+        .language-dropdown-container:hover {
+            background-color: #333;
+        }
+
+        .current-language {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.9em;
+            color: var(--text-color);
+        }
+        .current-language .arrow {
+            font-size: 0.7em;
+            margin-left: 5px;
+        }
+
+        .language-dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--navbar-bg);
+            border: 1px solid var(--neon-color);
+            border-top: none;
+            z-index: 10;
+            min-width: 150px;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.2s, visibility 0.2s;
+            padding: 5px 0;
+            border-radius: 0 0 5px 5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        .language-dropdown-container:hover .language-dropdown-menu {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .language-dropdown-menu a {
+            padding: 8px 15px;
+            color: var(--text-color);
+            text-decoration: none;
+            display: block;
+            white-space: nowrap;
+            transition: background-color 0.2s;
+        }
+        .language-dropdown-menu a:hover {
+            background-color: #3A3A3A;
+            color: var(--neon-color);
+        }
+        
+        .language-dropdown-menu .active-lang {
+            background-color: var(--secondary-bg);
+            color: var(--neon-color);
+        }
+
+        .user-profile {
+            background-color: #3A3A3A;
+            padding: 5px 10px;
+            border-radius: 5px;
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* --- MAIN LAYOUT & SIDEBAR --- */
+        .main-layout {
+            display: flex;
+            padding-top: 20px;
+            flex-grow: 1;
+            padding-bottom: 20px;
+        }
+
+        .side-panel {
+            width: var(--sidebar-width);
+            background-color: var(--secondary-bg);
+            padding: 20px 15px;
+            border-right: 2px solid var(--neon-color);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            position: relative;
+        }
+        .side-panel-item {
+            background-color: var(--primary-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            padding: 10px;
+            color: #999;
+            font-size: 0.9em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        /* Botones de Acción (Sidebar & Final) */
+        .support-buttons {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: center;
+        }
+        .btn-action {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-weight: 700;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.15s ease;
+            text-decoration: none;
+            display: block;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+        }
+        .btn-support {
+            background-color: var(--accent-color);
+            color: var(--primary-bg);
+        }
+        .btn-support:hover {
+            background-color: #E0A800;
+            transform: translateY(1px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+        }
+        .btn-paypal {
+            background-color: transparent;
+            color: var(--accent-color);
+            border: 2px solid var(--accent-color);
+            font-size: 0.8em;
+            padding: 8px;
+        }
+        .btn-paypal:hover {
+            background-color: var(--accent-color);
+            color: var(--primary-bg);
+            transform: translateY(1px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+        }
+
+        .content-area {
+            flex-grow: 1;
+            padding: 20px 30px;
+            background-color: var(--primary-bg);
+            position: relative;
+        }
+
+        .central-window {
+            background-color: var(--secondary-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 50px;
+            max-width: 90%;
+            margin: 0 auto;
+            min-height: 800px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            overflow-y: auto;
+        }
+
+        /* --- ESTILOS DE CABECERA DE SECCIÓN MEJORADA --- */
+        .section-title {
+            font-size: 2.8em;
+            font-weight: 800;
+            color: var(--neon-color);
+            margin-bottom: 35px;
+            text-align: center;
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--border-color);
+            text-shadow: 0 0 10px rgba(192, 255, 0, 0.5);
+        }
+        
+        .section-header-box {
+            display: flex;
+            align-items: center;
+            background-color: #111;
+            border-left: 5px solid var(--accent-color);
+            padding: 15px 20px;
+            margin-top: 45px;
+            margin-bottom: 25px;
+            border-radius: 4px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+        
+        .section-header-box h3 {
+            all: unset;
+            font-size: 2.1em;
+            color: var(--neon-color);
+            font-weight: 700;
+            padding-left: 15px;
+            text-shadow: 0 0 5px rgba(192, 255, 0, 0.3);
+        }
+        
+        .section-header-box .roman-numeral {
+            font-size: 2.5em;
+            font-weight: 800;
+            color: var(--accent-color);
+            line-height: 1;
+        }
+        
+        .roman-numeral-emoji {
+             font-size: 1.5em;
+             margin-right: 10px;
+        }
+        
+        /* Contenido y Listas */
+        .code-style {
+            font-family: 'Roboto Mono', monospace;
+            background-color: #333;
+            padding: 2px 6px;
+            border-radius: 3px;
+            color: var(--accent-color);
+        }
+        
+        .destacado {
+            color: var(--neon-color);
+            font-weight: 800;
+        }
+
+        .tabla-activos { width: 100%; border-collapse: collapse; margin-top: 20px; margin-bottom: 30px; font-size: 1em; border: 1px solid var(--border-color); }
+        .tabla-activos th, .tabla-activos td { padding: 15px 20px; border: 1px solid var(--border-color); text-align: left; vertical-align: top; }
+        .tabla-activos th { background-color: #333; color: var(--accent-color); font-weight: 700; text-transform: uppercase; }
+        .tabla-activos td { background-color: #262626; font-family: 'Roboto Mono', monospace; color: #D0D0D0; }
+        .tabla-activos tr:hover td { background-color: #2D2D2D; }
+        .col-elemento { font-family: 'Montserrat', sans-serif; font-weight: 700; color: var(--text-color); width: 25%; }
+        
+        .limitations-list-container, .services-list-container { padding: 20px; background-color: #262626; border-radius: 8px; margin-bottom: 30px; }
+        .limitations-list, .services-list { list-style: none; padding-left: 0; margin: 0; }
+        .limitations-list li, .services-list li { position: relative; padding-left: 30px; font-size: 1.1em; margin-bottom: 12px; color: #E0E0E0; }
+        .limitations-list li::before { content: '❌'; position: absolute; left: 0; top: 0; color: var(--error-color); font-size: 1.1em; }
+        .services-list li::before { content: '✅'; position: absolute; left: 0; top: 0; color: var(--neon-color); font-size: 1.1em; }
+
+        blockquote { background-color: #2D2D2D; border-left: 6px solid var(--accent-color); padding: 20px 25px; margin: 30px 0; font-style: italic; color: #AAA; border-radius: 0 8px 8px 0; line-height: 1.5; }
+        
+        .contacto-final { text-align: center; margin-top: 50px; padding-top: 30px; border-top: 2px dashed var(--border-color); }
+        .final-buttons-container { display: flex; justify-content: center; gap: 20px; margin-top: 20px; margin-bottom: 30px; }
+        
+        .btn-contacto { padding: 12px 25px; border-radius: 6px; font-weight: 700; cursor: pointer; transition: all 0.2s ease; font-size: 1em; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); text-decoration: none;}
+        .btn-discord { background-color: var(--neon-color); color: var(--primary-bg); border: 2px solid var(--neon-color); }
+        .btn-discord:hover { background-color: #A0D800; transform: translateY(-2px); box-shadow: 0 6px 8px rgba(0, 0, 0, 0.4); }
+        .btn-paypal-final { background-color: transparent; color: var(--accent-color); border: 2px solid var(--accent-color); }
+        .btn-paypal-final:hover { background-color: var(--accent-color); color: var(--primary-bg); transform: translateY(-2px); box-shadow: 0 6px 8px rgba(0, 0, 0, 0.4); }
+
+        .gallery-container { margin-top: 30px; padding: 20px; background-color: #111; border: 1px solid var(--border-color); border-radius: 8px; display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; }
+        .gallery-item { width: 300px; height: 180px; background-color: #333; border: 3px solid var(--secondary-bg); border-radius: 5px; overflow: hidden; position: relative; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); transition: transform 0.3s ease; }
+        .gallery-item:hover { transform: scale(1.05); border-color: var(--neon-color); }
+        .watermark { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-25deg); color: rgba(255, 255, 255, 0.15); font-size: 2.5em; font-weight: 800; text-transform: uppercase; font-family: 'Roboto Mono', monospace; pointer-events: none; user-select: none; white-space: nowrap; }
+
+        /* FOOTER (Maintained) */
+        .footer { background-color: var(--navbar-bg); border-top: 3px solid var(--neon-color); padding: 30px 20px; text-align: center; color: #999; font-size: 0.9em; margin-top: auto; }
+        .footer p { margin: 0 0 10px 0; line-height: 1.5; }
+        .footer .logo-footer { font-size: 1.3em; color: var(--neon-color); font-weight: 700; margin-bottom: 10px; }
+        .footer strong { color: var(--text-color); }
+        .footer .btn-paypal-footer { display: inline-block; margin: 15px auto; padding: 8px 15px; font-size: 0.9em; color: var(--accent-color); border: 2px solid var(--accent-color); border-radius: 5px; text-decoration: none; font-weight: 600; transition: all 0.2s; }
+        .footer .btn-paypal-footer:hover { background-color: var(--accent-color); color: var(--primary-bg); transform: translateY(-1px); }
+
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        
+        <div class="header-left">
+            <div class="navbar-item"><a href="index_en.html" class="active"> OFFICIAL GUIDE 📜|</a></div>
+            <div class="navbar-item"><a href="#">SWF PACKS 🛡️| </a></div>
+            <div class="navbar-item"><a href="#">FULL MAPS 🗺️</a></div>
+        </div>
+
+        <div class="navbar-center">
+            
+            <div class="navbar-text-separator">⭐TIMBY.FORGE⭐</div>
+            
+            <div class="navbar-logo-center">
+          
+            </div>
+            
+    
+        </div>
+        
+        <div class="header-right">
+            
+            <div class="language-dropdown-container">
+                <div class="current-language">
+                    <span class="flag">🇬🇧 EN</span>
+                    <span class="arrow">▼</span>
+                </div>
+                <div class="language-dropdown-menu">
+                    <a href="index_es.html">🇪🇸 Español</a>
+                    <a href="index_en.html" class="active-lang">🇬🇧 English</a>
+                    <a href="index_fr.html">🇫🇷 Français</a>
+                </div>
+            </div>
+            
+            <div class="navbar-item">
+                <a href="#">SOCIAL MEDIA 🌐 ▼</a>
+                <div class="dropdown-menu">
+                    <a href="https://discord.gg/3Qx5WXHN">Official Discord</a>
+                </div>
+            </div>
+
+            <div class="user-profile">
+                <span style="color: #FF69B4;">OFFICIAL</span>
+                <span>PRESENTATION</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-layout">
+        <div class="side-panel">
+            <div class="side-panel-item">🎨 Full HD Design and Implementation</div>
+            <div class="side-panel-item">🔮 Special SWF Requests</div>
+            <div class="side-panel-item">⚔️ Complete Maps</div>
+            <div class="side-panel-item">⚙️ AI Tools Designed by Timby</div>
+            
+            <div class="support-buttons">
+    
+                </a>
+            </div>
+        </div>
+
+        <div class="content-area">
+            <div class="central-window">
+                
+                <h1 class="section-title">✨ TIMBYDFORGE: Forging the RPG Server Elite</h1>
+                
+                <p>At <span class="destacado">Timby.Forge</span>, we turn your vision into a visually stunning reality, backed by **over a decade of expertise** in the <span class="code-style">Emulation</span> sector.</p>
+                
+                <p>Our commitment to innovation is materialized in a <span class="destacado">patented map design and creation tool</span>, developed in-house, ensuring unparalleled quality and production speed for our assets. We don't use generic sets; we forge your own legend!</p>
+                
+                <p>Our promise is <span class="destacado">absolute trust</span>: a **100% reliability** in the final delivery, guaranteed by our track record and the explicit endorsement of owners of other elite servers.</p>
+                
+                <hr style="border-top: 1px solid var(--border-color); margin: 30px 0;">
+
+                <div class="section-header-box">
+                    <span class="roman-numeral-emoji">⚔️</span>
+                    <span class="roman-numeral">I.</span>
+                    <h3>The Premium SWF Arsenal: The Forge of Maps and Items</h3>
+                </div>
+                
+                <p>We offer high-quality **"Plug & Play"** assets, designed to inject fresh and functional content into your platform. The **next generation** of exclusive content is within your reach to enrich the experience of your adventurers.</p>
+                
+                <h4>📚 Legendary Themed Collections (4-5 New Packs Coming Soon):</h4>
+                
+                <table class="tabla-activos">
+                    <thead>
+                        <tr>
+                            <th class="col-elemento">Element</th>
+                            <th>Monthly Added Value per Subscription</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="col-elemento">**HD Scenarios** 🗺️</td>
+                            <td>Access to an **exclusive HD Map** of the month and our library of optimized maps. Constantly add epic environments to your **World of Twelve**!</td>
+                        </tr>
+                        <tr>
+                            <td class="col-elemento">**2D NPCs** 🎭</td>
+                            <td>**New static 2D NPC designs** included in the monthly pack. Models ready for essential roles (<span class="code-style">merchandising</span>, <span class="code-style">lore</span>, <span class="code-style">quests</span>).</td>
+                        </tr>
+                        <tr>
+                            <td class="col-elemento">**Themed ItemSets** 💎</td>
+                            <td>Complete sets, including **custom Dofus**, with <span class="code-style">SWF</span> files and pre-drafted <span class="destacado">Language Texts (Lang)</span>, renewed monthly.</td>
+                        </tr>
+                        <tr>
+                            <td class="col-elemento">**Priority Support** 🛠️</td>
+                            <td><span class="destacado">Integration Guarantee:</span> Priority support on Discord and access to **AnyDesk Assistance** hours (depending on the plan) for implementation in Core G2.</td>
+                        </tr>
+                        <tr>
+                            <td class="col-elemento">**A La Carte Design** 🎨</td>
+                            <td>Access to **exclusive quotation** and **permanent discounts** on large Graphic Design projects (Launchers, Core Panels), exclusive subscriber benefits.</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="section-header-box">
+                    <span class="roman-numeral-emoji">🚧</span>
+                    <span class="roman-numeral">II.</span>
+                    <h3>Current and Future Limitations (Full Transparency)</h3>
+                </div>
+
+                <p>In the interest of maximum transparency and precision in delivery, we detail the areas currently not covered by our SWF Forge services:</p>
+
+                <div class="limitations-list-container">
+                    <ul class="limitations-list">
+                        <li>**Animated Bosses and Monsters:** We do not design or create the animation (walk/attack) for complex enemies.</li>
+                        <li>**NPCs with Movement (4 Sides):** Currently, we only offer static 2D models (no walking animation).</li>
+                        <li>**Advanced Spells/Visual Effects:** We do not perform complex animations of spells or combat effects. *We are working to incorporate an advanced animation module in the future!*</li>
+                    </ul>
+                </div>
+                
+                <div class="section-header-box">
+                    <span class="roman-numeral-emoji">✅</span>
+                    <span class="roman-numeral">III.</span>
+                    <h3>Comprehensive Service: What We Do Forge for You</h3>
+                </div>
+                
+                <p>Our expertise is focused on solid elements that build the framework of your server. This is what we guarantee with Timby.Forge quality:</p>
+                
+                <div class="services-list-container">
+                    <ul class="services-list">
+                        <li>🛡️ **High-Impact Logo** (The visible face of your Server).</li>
+                        <li>💻 **Launcher Graphic Design** (World Access Interface).</li>
+                        <li>📊 **Core Panels Design** (Application and visual creation of your ideas, if possible).</li>
+                        <li>🖼️ **Promotional Graphics and UI.**</li>
+                        <li>📜 **SWF Content Packs** (Maps, Items, Static 2D NPCs).</li>
+                    </ul>
+                </div>
+
+                <div class="section-header-box">
+                    <span class="roman-numeral-emoji">📜</span>
+                    <span class="roman-numeral">IV.</span>
+                    <h3>Collaboration and Confidentiality Pact</h3>
+                </div>
+                
+                <p>Our effectiveness is based on a transparent process and strict professional ethics, designed for your peace of mind and the speed of the project:</p>
+                <ol>
+                    <li>🔍 Core Diagnosis and Technical Margins Study.</li>
+                    <li>💬 Strategic Consultation to align design with your objectives.</li>
+                    <li>⚙️ Handcrafted Application and integration of designs into your Core, assisted by <span class="code-style">AnyDesk</span>.</li>
+                </ol>
+                
+                <blockquote>
+                    <p><strong>Confidentiality Framework (The Vow of Silence) 🤫:</strong> I propose a **Unilateral Verbal Agreement** that allows us to work with files in a private cloud (<span class="code-style">Drive</span>). This ensures <span class="destacado">maximum speed</span> in modification and **zero risk** of sharing with third parties.</p>
+                </blockquote>
+
+                <div class="section-header-box">
+                    <span class="roman-numeral-emoji">🖼️</span>
+                    <span class="roman-numeral">V.</span>
+                    <h3>The Forge Gallery (Project Samples)</h3>
+                </div>
+                
+                <p style="text-align: center; margin-bottom: 25px;">A small sample of the visual and technical quality of our designs, endorsed by the community and server owners.</p>
+
+                <div class="gallery-container">
+                    <div class="gallery-item" style="background-image: url('placeholder_map_1.jpg'); background-size: cover;">
+                        <span class="watermark">TIMBY.FORGE</span>
+                    </div>
+                    <div class="gallery-item" style="background-image: url('placeholder_item_2.jpg'); background-size: cover;">
+                        <span class="watermark">TIMBY.FORGE</span>
+                    </div>
+                    <div class="gallery-item" style="background-image: url('placeholder_npc_3.jpg'); background-size: cover;">
+                        <span class="watermark">TIMBY.FORGE</span>
+                    </div>
+                    <div class="gallery-item" style="background-image: url('placeholder_launcher_4.jpg'); background-size: cover;">
+                        <span class="watermark">TIMBY.FORGE</span>
+                    </div>
+                    <div class="gallery-item" style="background-image: url('placeholder_ui_5.jpg'); background-size: cover;">
+                        <span class="watermark">TIMBY.FORGE</span>
+                    </div>
+                </div>
+                <div class="contacto-final">
+                    <h4>⚔️ Forge Your Legacy with Timby.Forge.</h4>
+                    <p>The community has used and valued our work for years, without even knowing its origin. It's time to put aside the generic and choose excellence.</p>
+                    
+                    <h4 style="margin-top: 30px; color: var(--neon-color);">CONTACT AND SUPPORT</h4>
+
+                    <div class="final-buttons-container">
+                        <a href="https://discord.gg/3Qx5WXHN" target="_blank" class="btn-contacto btn-discord">
+                            <span style="font-size: 1.2em;">💬</span> Contact (TimbyGames)
+                        </a>
+
+                        <a href="[PAYPAL.ME/BLUETIMBY]" target="_blank" class="btn-contacto btn-paypal-final">
+                            <span style="font-size: 1.2em;">💰</span> Support the Project
+                        </a>
+                    </div>
+                </div>
+
+                <p style="text-align: center; margin-top: 20px;">SINCERELY,<br><strong>Timby</strong><br>*Founder of Timby.Forge*</p>
+
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="logo-footer">TIMBYDFORGE</div>
+        <p>Driving creativity and innovation in the Universe of servers. At **Timby.Forge**, every pixel is a spell and every line of code is forged with the **essence of a Dofus** to transform your vision into a legendary reality. Dive into a world of infinite possibilities, where quality and distinction are our signature.</p>
+        
+        <a href="[PAYPAL.ME/BLUETIMBY]" class="btn-paypal-footer" target="_blank">
+            Support Project (PayPal)
+        </a>
+
+        <p>&copy; 2026 Timby.Forge. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
